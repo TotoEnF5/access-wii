@@ -1,9 +1,13 @@
 extends Control
 
 
+var thread: Thread # need this so the thread doesn't die at the end of _ready
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Thread.new().start(_connect_wiimotes_thread)
+	thread = Thread.new()
+	thread.start(_connect_wiimotes_thread)
 
 
 func _input(event: InputEvent) -> void:
@@ -21,3 +25,7 @@ func _connect_wiimotes_thread() -> void:
 func _on_button_pressed() -> void:
 	GDWiimoteServer.finalize_connection()
 	$Label.text = "connected!"
+
+
+func _on_button_2_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/main.tscn")

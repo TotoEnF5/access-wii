@@ -13,9 +13,9 @@ script = ExtResource("1_6thnr")
 
 [node name="Label" type="Label" parent="." unique_id=881167243]
 layout_mode = 0
-offset_top = 157.0
+offset_top = 388.0
 offset_right = 651.0
-offset_bottom = 245.0
+offset_bottom = 476.0
 theme_override_font_sizes/font_size = 64
 text = "waiting for wiimote..."
 
@@ -26,4 +26,13 @@ offset_bottom = 8.0
 theme_override_font_sizes/font_size = 64
 text = "finalize connection"
 
+[node name="Button2" type="Button" parent="." unique_id=1549267004]
+layout_mode = 0
+offset_top = 204.0
+offset_right = 470.0
+offset_bottom = 300.0
+theme_override_font_sizes/font_size = 64
+text = "go to the game"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
