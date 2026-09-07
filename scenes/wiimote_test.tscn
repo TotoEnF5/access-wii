@@ -34,5 +34,14 @@ offset_bottom = 300.0
 theme_override_font_sizes/font_size = 64
 text = "go to the game"
 
+[node name="Button3" type="Button" parent="." unique_id=840619425]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 345.0
+offset_right = 161.0
+offset_bottom = 376.0
+text = "toggle rumble"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
