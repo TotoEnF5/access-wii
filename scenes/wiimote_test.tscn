@@ -42,6 +42,11 @@ offset_right = 161.0
 offset_bottom = 376.0
 text = "toggle rumble"
 
+[node name="Label2" type="Label" parent="." unique_id=2104352147]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
