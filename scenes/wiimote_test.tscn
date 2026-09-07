@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bbfgomkxne0f3"]
+
+[ext_resource type="Script" uid="uid://fap2xs77qe1y" path="res://scripts/wiimote_test.gd" id="1_6thnr"]
+
+[node name="WiimoteTest" type="Control" unique_id=1351195318]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6thnr")
+
+[node name="Label" type="Label" parent="." unique_id=881167243]
+layout_mode = 0
+offset_top = 157.0
+offset_right = 651.0
+offset_bottom = 245.0
+theme_override_font_sizes/font_size = 64
+text = "waiting for wiimote..."
+
+[node name="Button" type="Button" parent="." unique_id=1151773198]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 64
+text = "finalize connection"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
