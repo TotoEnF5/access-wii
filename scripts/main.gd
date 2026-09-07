@@ -20,12 +20,12 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("player1_slash"):
-		print("player 1 won")
-		_reset()
+		_label.text = "player 1 won"
+		$Timer2.start()
 
 	if event.is_action_pressed("player2_slash"):
-		print("player 2 won")
-		_reset()
+		_label.text = "player 2 won"
+		$Timer2.start()
 
 
 func _reset() -> void:
@@ -40,3 +40,7 @@ func _on_timer_timeout() -> void:
 	_waiting_for_input = true
 	_color_rect.color = Color.RED
 	_label.text = "slash!"
+
+
+func _on_timer_2_timeout() -> void:
+	_reset()
