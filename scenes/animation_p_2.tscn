@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dhh7k0tn50inh"]
+
+[ext_resource type="SpriteFrames" uid="uid://bx3rxpj2p6x7e" path="res://Visuals/slashP2.tres" id="1_f4ejs"]
+
+[node name="AnimationP1" type="AnimatedSprite2D" unique_id=1738996377]
+sprite_frames = ExtResource("1_f4ejs")
+frame = 2
+frame_progress = 1.0
+speed_scale = 2.0

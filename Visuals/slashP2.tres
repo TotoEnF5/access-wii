@@ -1,0 +1,22 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bx3rxpj2p6x7e"]
+
+[ext_resource type="Texture2D" uid="uid://ckcnfhbvjokva" path="res://Visuals/AnimP2/access_samourai_p2_damaged_01.png" id="1_2kdlj"]
+[ext_resource type="Texture2D" uid="uid://bber12xkqtqk7" path="res://Visuals/AnimP2/access_samourai_p2_damaged_02.png" id="2_wd67n"]
+[ext_resource type="Texture2D" uid="uid://dnmfnoym6yd1t" path="res://Visuals/AnimP2/access_samourai_p2_damaged_03.png" id="3_wnt8d"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2kdlj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wd67n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wnt8d")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
