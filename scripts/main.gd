@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 @export var min_time: float = 1.0
 @export var max_time: float = 3.0
@@ -12,8 +12,8 @@ extends Control
 @onready var _timer = $Timer
 @onready var _timer2 = $Timer2
 
-@onready var ui_joueur1 = $UI_Joueur1
-@onready var ui_joueur2 = $UI_Joueur2
+@onready var ui_joueur1 = $Camera2D/UI_Joueur1
+@onready var ui_joueur2 = $Camera2D/UI_Joueur2
 
 # Un nouveau nœud pour regrouper proprement les animations générées
 @onready var conteneur_animations = $ConteneurAnimations 
@@ -40,11 +40,11 @@ var pv_j2: int = 3
 var animation_actuelle: Node = null 
 
 func _ready() -> void:
-	bgm.play()
+	bgm.call_deferred("play")
 	pv_j1 = 3
 	pv_j2 = 3
-	ui_joueur1.set_pv(pv_j1)
-	ui_joueur2.set_pv(pv_j2)
+	ui_joueur1.call_deferred("set_pv", pv_j1)
+	ui_joueur2.call_deferred("set_pv", pv_j2)
 	_reset()
 
 func _input(event: InputEvent) -> void:
