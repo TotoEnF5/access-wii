@@ -5,9 +5,9 @@ extends Node
 @export var temps_de_clash: float = 0.08 
 
 # --- VOS SCÈNES D'ANIMATION (.tscn) ---
-@export var scene_anim_j1: PackedScene    # Animation quand le Joueur 1 attaque/gagne
-@export var scene_anim_j2: PackedScene    # Animation quand le Joueur 2 attaque/gagne
-@export var scene_anim_clash: PackedScene # Animation quand les deux frappent en même temps
+@export var scene_anim_j1: PackedScene    
+@export var scene_anim_j2: PackedScene    
+@export var scene_anim_clash: PackedScene 
 
 @onready var _timer = $Timer
 @onready var _timer2 = $Timer2
@@ -15,8 +15,8 @@ extends Node
 @onready var ui_joueur1 = $Camera2D/UI_Joueur1
 @onready var ui_joueur2 = $Camera2D/UI_Joueur2
 
-# Un nouveau nœud pour regrouper proprement les animations générées
 @onready var conteneur_animations = $ConteneurAnimations 
+@onready var label_signal = $Label # NOUVEAU : Référence au texte
 
 # --- SONS ---
 @onready var bgm = $BGM             
@@ -36,11 +36,12 @@ var _first_attacker: int = 0
 var pv_j1: int = 3
 var pv_j2: int = 3
 
-# Cette variable garde en mémoire l'animation affichée pour pouvoir l'effacer au round suivant
 var animation_actuelle: Node = null 
 
 func _ready() -> void:
 	bgm.call_deferred("play")
+	_timer.timeout.connect(_on_timer_timeout)
+	_timer2.timeout.connect(_on_timer_2_timeout)
 	pv_j1 = 3
 	pv_j2 = 3
 	ui_joueur1.call_deferred("set_pv", pv_j1)
@@ -74,35 +75,45 @@ func _tenter_coup(joueur_id: int) -> void:
 		if joueur_id != _first_attacker:
 			_clash_happened = true
 
-# --- NOUVELLE FONCTION POUR AFFICHER LES ANIMATIONS ---
+# --- FONCTION POUR AFFICHER ET GÉRER L'ANIMATION ---
 func _jouer_animation(scene_a_instancier: PackedScene) -> void:
-	# 1. S'il y a déjà une animation à l'écran, on la supprime
-	if animation_actuelle != null:
+	# 1. Nettoyage de sécurité
+	if animation_actuelle != null and is_instance_valid(animation_actuelle):
 		animation_actuelle.queue_free()
 		
-	# 2. Si on a bien renseigné une scène dans l'Inspecteur
+	# 2. Instanciation
 	if scene_a_instancier != null:
-		# On crée une copie de la scène (l'instancie)
 		animation_actuelle = scene_a_instancier.instantiate()
-		# On l'ajoute dans notre conteneur pour l'afficher à l'écran
 		conteneur_animations.add_child(animation_actuelle)
+		animation_actuelle.play()
+		
+		# 3. Connexion dynamique : quand l'animation est finie, on la détruit
+		if animation_actuelle.has_signal("animation_finished"):
+			animation_actuelle.animation_finished.connect(_on_animation_finished)
 
+# Nouvelle fonction appelée automatiquement à la fin de l'animation
+func _on_animation_finished() -> void:
+	if animation_actuelle != null and is_instance_valid(animation_actuelle):
+		animation_actuelle.queue_free()
+		animation_actuelle = null
 
 func _resoudre_clash() -> void:
-	_jouer_animation(scene_anim_clash) # Affiche l'animation du clash
+	label_signal.text = "" # On cache le texte de signal
+	_jouer_animation(scene_anim_clash) 
 	sfx_clash.play() 
 	_timer2.start()
 
 func _resoudre_round(gagnant_du_round: int) -> void:
+	label_signal.text = "" # On cache le texte de signal
 	sfx_slash.play()  
 	sfx_defaite.play()
 
 	if gagnant_du_round == 1:
-		_jouer_animation(scene_anim_j1) # Affiche l'animation du Joueur 1
+		_jouer_animation(scene_anim_j1) 
 		pv_j2 -= 1
 		ui_joueur2.set_pv(pv_j2)
 	else:
-		_jouer_animation(scene_anim_j2) # Affiche l'animation du Joueur 2
+		_jouer_animation(scene_anim_j2) 
 		pv_j1 -= 1
 		ui_joueur1.set_pv(pv_j1)
 	
@@ -119,8 +130,8 @@ func _reset() -> void:
 	if _game_over:
 		return 
 		
-	# On supprime l'animation du round précédent quand un nouveau round commence
-	if animation_actuelle != null:
+	# Sécurité supplémentaire au cas où l'animation n'aurait pas eu le temps de finir
+	if animation_actuelle != null and is_instance_valid(animation_actuelle):
 		animation_actuelle.queue_free()
 		animation_actuelle = null
 		
@@ -129,12 +140,14 @@ func _reset() -> void:
 	_clash_happened = false
 	_first_attacker = 0
 	
+	label_signal.text = "" # On s'assure que le texte est vide pendant l'attente
+	
 	_timer.wait_time = randf_range(min_time, max_time)
 	_timer.start()
 
 func _on_timer_timeout() -> void:
 	_waiting_for_input = true
-	# Plus de changement de couleur ni de texte ici !
+	label_signal.text = "vibration !!" # Le texte apparaît pile au bon moment !
 	sfx_signal.play() 
 
 func _on_timer_2_timeout() -> void:

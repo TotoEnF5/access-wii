@@ -14,9 +14,12 @@
 [ext_resource type="AudioStream" uid="uid://dbk4136qs33om" path="res://sunds/SFX_Blood.wav" id="9_w22tq"]
 [ext_resource type="AudioStream" uid="uid://bjjgiiv11ea12" path="res://sunds/Samourai_Amb.wav" id="10_e8rlm"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_w22tq"]
+font_size = 64
+
 [node name="GameScene" type="Node2D" unique_id=250302190]
 script = ExtResource("5_7s5hy")
-temps_de_clash = 0.2
+temps_de_clash = 0.02
 scene_anim_j1 = ExtResource("6_6pl24")
 scene_anim_j2 = ExtResource("7_w22tq")
 scene_anim_clash = ExtResource("8_w22tq")
@@ -30,12 +33,12 @@ texture = ExtResource("1_vh257")
 anchors_preset = 5
 anchor_top = 0.0
 anchor_bottom = 0.0
-offset_left = -471.0
-offset_top = -512.0
-offset_right = 196.25275
-offset_bottom = -182.0
+offset_left = -599.0
+offset_top = -534.0
+offset_right = -231.0
+offset_bottom = -204.0
 grow_vertical = 1
-scale = Vector2(1, 1)
+scale = Vector2(1, 0.7)
 texture_pv_plein = ExtResource("3_18ig4")
 texture_pv_vide = ExtResource("4_7s5hy")
 
@@ -43,16 +46,16 @@ texture_pv_vide = ExtResource("4_7s5hy")
 anchors_preset = 5
 anchor_top = 0.0
 anchor_bottom = 0.0
-offset_left = 74.0
-offset_top = -533.0
-offset_right = 442.0
-offset_bottom = -351.0
+offset_left = 472.0
+offset_top = -543.0
+offset_right = 840.0
+offset_bottom = -215.505
 grow_vertical = 1
-scale = Vector2(2, 2)
+scale = Vector2(1, 0.8)
 
 [node name="SFX_Signal" type="AudioStreamPlayer2D" parent="." unique_id=787814867]
 
-[node name="SFX_Win" type="AudioStreamPlayer2D" parent="." unique_id=296238620]
+[node name="SFX_Victoire" type="AudioStreamPlayer2D" parent="." unique_id=296238620]
 stream = ExtResource("6_yrli1")
 
 [node name="SFX_Slash" type="AudioStreamPlayer2D" parent="." unique_id=2062952655]
@@ -72,3 +75,12 @@ one_shot = true
 
 [node name="Timer2" type="Timer" parent="." unique_id=1070731194]
 one_shot = true
+
+[node name="Label" type="Label" parent="." unique_id=1198192311]
+offset_left = -1.0
+offset_top = -12.0
+offset_bottom = 11.0
+label_settings = SubResource("LabelSettings_w22tq")
+
+[node name="ConteneurAnimations" type="CenterContainer" parent="." unique_id=1467944116]
+use_top_left = true

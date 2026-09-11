@@ -15,12 +15,17 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("3_3inbn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3inbn")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"default",
 "speed": 5.0
 }]
 
 [node name="AnimationP1" type="AnimatedSprite2D" unique_id=1738996377]
 sprite_frames = SubResource("SpriteFrames_qdd7p")
+frame = 3
+frame_progress = 1.0
 speed_scale = 2.0
