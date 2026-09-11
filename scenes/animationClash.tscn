@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b7sknv68ntp17"]
+
+[ext_resource type="Texture2D" uid="uid://c7icihgsnu7e" path="res://Visuals/access_samourai_clash_01.png" id="1_4lrlm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ihcvm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4lrlm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_4lrlm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_4lrlm")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=1518680814]
+sprite_frames = SubResource("SpriteFrames_ihcvm")

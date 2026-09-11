@@ -4,6 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://einv0wmvdkes" path="res://scenes/player_health_ui.tscn" id="2_xy3my"]
 [ext_resource type="Texture2D" uid="uid://b3c7vch0sjt8o" path="res://Visuals/AnimP2/access_samourai_life_point_p2.png" id="3_18ig4"]
 [ext_resource type="Texture2D" uid="uid://w1o7bxusbhbq" path="res://Visuals/AnimP2/access_samourai_life_point_damaged_p2.png" id="4_7s5hy"]
+[ext_resource type="Script" uid="uid://b5jwhgsl0k2m0" path="res://scripts/main.gd" id="5_7s5hy"]
+[ext_resource type="PackedScene" uid="uid://cs2p5rvx1f2ie" path="res://scenes/animation_p_1.tscn" id="6_6pl24"]
+[ext_resource type="AudioStream" uid="uid://py4jrnalxmob" path="res://sunds/Victory_sound.wav" id="6_yrli1"]
+[ext_resource type="AudioStream" uid="uid://dxiv67smplon6" path="res://sunds/Slideup_2_v2.wav" id="7_j40tv"]
+[ext_resource type="PackedScene" uid="uid://dhh7k0tn50inh" path="res://scenes/animation_p_2.tscn" id="7_w22tq"]
+[ext_resource type="AudioStream" uid="uid://chhicegru6edv" path="res://sunds/Clash_2_v2.wav" id="8_6pl24"]
+[ext_resource type="PackedScene" uid="uid://b7sknv68ntp17" path="res://scenes/animationClash.tscn" id="8_w22tq"]
+[ext_resource type="AudioStream" uid="uid://dbk4136qs33om" path="res://sunds/SFX_Blood.wav" id="9_w22tq"]
+[ext_resource type="AudioStream" uid="uid://bjjgiiv11ea12" path="res://sunds/Samourai_Amb.wav" id="10_e8rlm"]
 
 [node name="GameScene" type="Node2D" unique_id=250302190]
 
@@ -12,7 +21,7 @@
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D" unique_id=392207305]
 texture = ExtResource("1_vh257")
 
-[node name="PlayerHealthUI" parent="Camera2D" unique_id=1705562610 instance=ExtResource("2_xy3my")]
+[node name="UI_Joueur1" parent="Camera2D" unique_id=1705562610 instance=ExtResource("2_xy3my")]
 anchors_preset = 5
 anchor_top = 0.0
 anchor_bottom = 0.0
@@ -25,7 +34,7 @@ scale = Vector2(1, 1)
 texture_pv_plein = ExtResource("3_18ig4")
 texture_pv_vide = ExtResource("4_7s5hy")
 
-[node name="PlayerHealthUI2" parent="Camera2D" unique_id=1717648938 instance=ExtResource("2_xy3my")]
+[node name="UI_Joueur2" parent="Camera2D" unique_id=1717648938 instance=ExtResource("2_xy3my")]
 anchors_preset = 5
 anchor_top = 0.0
 anchor_bottom = 0.0
@@ -35,3 +44,27 @@ offset_right = 442.0
 offset_bottom = -351.0
 grow_vertical = 1
 scale = Vector2(2, 2)
+
+[node name="Node" type="Node" parent="." unique_id=255185343]
+script = ExtResource("5_7s5hy")
+temps_de_clash = 0.2
+scene_anim_j1 = ExtResource("6_6pl24")
+scene_anim_j2 = ExtResource("7_w22tq")
+scene_anim_clash = ExtResource("8_w22tq")
+
+[node name="SFX_Signal" type="AudioStreamPlayer2D" parent="." unique_id=787814867]
+
+[node name="SFX_Win" type="AudioStreamPlayer2D" parent="." unique_id=296238620]
+stream = ExtResource("6_yrli1")
+
+[node name="SFX_Slash" type="AudioStreamPlayer2D" parent="." unique_id=2062952655]
+stream = ExtResource("7_j40tv")
+
+[node name="SFX_Clash" type="AudioStreamPlayer2D" parent="." unique_id=447694645]
+stream = ExtResource("8_6pl24")
+
+[node name="SFX_Defaite" type="AudioStreamPlayer2D" parent="." unique_id=1522708886]
+stream = ExtResource("9_w22tq")
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="." unique_id=962309928]
+stream = ExtResource("10_e8rlm")
